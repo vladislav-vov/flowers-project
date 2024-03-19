@@ -1,0 +1,63 @@
+@function percent($px, $from: 100) {
+	$result: math.div($px, $from) * 100%;
+	@return $result;
+}
+
+@mixin adaptiveValue(
+	$property,
+	$startSize,
+	$minSize,
+	$widthFrom: $containerWidth,
+	$widthTo: $minWidth
+) {
+	$addSize: math.div($startSize - $minSize, 16);
+
+	@if ($widthFrom == $containerWidth and $maxWidthContainer == 0) {
+		$widthFrom: $maxWidth;
+	}
+
+	$widthFromMedia: $widthFrom + px;
+	$widthToMedia: $widthTo + px;
+
+	$slope: math.div(($startSize - $minSize), ($widthFrom - $widthTo));
+	$yIntersection: -$widthTo * $slope + $minSize;
+
+	@if ($yIntersection==0) {
+		$yIntersection: 0.000001;
+	}
+
+	$flyValue: #{$yIntersection}px ' + ' #{$slope * 100}vw;
+	$propertyValue: #{'clamp(' $minSize + 'px,' $flyValue ',' $startSize + 'px)'};
+
+	@if ($minSize > $startSize) {
+		$propertyValue: #{'clamp('
+			$startSize +
+			'px,'
+			$flyValue
+			','
+			$minSize +
+			'px)'};
+	}
+
+	@media (min-width: $widthFromMedia) {
+		#{$property}: $startSize + px;
+	}
+
+	@media (min-width: $widthToMedia) and (max-width: $widthFromMedia) {
+		@supports (#{$property}: $propertyValue) {
+			#{$property}: $propertyValue;
+		}
+
+		@supports not (#{$property}: $propertyValue) {
+			#{$property}: calc(
+				#{$minSize}px + #{$addSize} * (100vw - #{$widthTo}px) / #{math.div(
+						$widthFrom,
+						16
+					) - math.div($widthTo, 16)}
+			);
+		}
+	}
+	@media (max-width: $widthToMedia) {
+		#{$property}: $minSize + px;
+	}
+}

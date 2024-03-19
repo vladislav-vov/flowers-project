@@ -1,0 +1,22 @@
+body {
+  background-color: #fff;
+  color: $textColor;
+  font-family: $fontFamily, sans-serif;
+  font-weight: 400;
+  font-size: $fontSize + px;
+  line-height: 24px;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+[class*='__container'],
+[class*='container'] {
+  margin: 0 auto;
+  max-width: $containerWidth + px;
+  @if ($containerPadding > 0) {
+    padding: 0 math.div($containerPadding, 2) + px;
+  }
+}
