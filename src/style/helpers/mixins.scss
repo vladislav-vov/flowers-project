@@ -1,6 +1,12 @@
-@function percent($px, $from: 100) {
-	$result: math.div($px, $from) * 100%;
-	@return $result;
+@mixin font($name, $filename, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: $name;
+		src: url('../../fonts/#{$filename}.woff2') format('woff2'),
+			url('../../fonts/#{$filename}.woff') format('woff');
+		font-style: $style;
+		font-weight: $weight;
+		font-display: swap;
+	}
 }
 
 @mixin adaptiveValue(

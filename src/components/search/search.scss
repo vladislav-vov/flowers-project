@@ -1,0 +1,118 @@
+.search {
+	position: relative;
+	display: inline-flex;
+	align-items: flex-end;
+	gap: 10px;
+	width: 100%;
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -3px;
+		left: 0;
+		right: 0;
+		width: 0;
+		height: 1px;
+		background-color: #555;
+		transition: width 0.5s ease;
+	}
+
+	&--open {
+		&::after {
+			width: 100%;
+		}
+	}
+
+	&__icon {
+		flex: 0 0 18px;
+	}
+
+	&__btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 18px;
+		height: 18px;
+		cursor: not-allowed;
+
+		&:not(:disabled) {
+			cursor: pointer;
+
+			@media (any-hover: hover) {
+				svg {
+					transition: fill 0.3s ease-in-out;
+
+					&:hover {
+						fill: #43ffd2;
+					}
+				}
+			}
+		}
+	}
+
+	&__text {
+		text-transform: uppercase;
+		font-size: 14px;
+		line-height: 21px;
+		letter-spacing: 1px;
+		cursor: pointer;
+
+		@media (any-hover: hover) {
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: #43ffd2;
+			}
+		}
+	}
+
+	&__input {
+		width: 0;
+		padding: 0;
+		background: transparent;
+		border: none;
+		outline: none;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 21px;
+		letter-spacing: 1px;
+		color: #fff;
+		text-transform: uppercase;
+		pointer-events: none;
+		visibility: hidden;
+		transition: width 0.5s ease;
+
+		&::placeholder {
+			color: #7c7c7c;
+			font-weight: 300;
+			letter-spacing: normal;
+			text-transform: math-auto;
+		}
+
+		&--open {
+			width: 100%;
+			pointer-events: all;
+			visibility: visible;
+		}
+	}
+
+	&__field {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		width: 100%;
+	}
+
+	&__close {
+		fill: #7c7c7c;
+
+		@media (any-hover: hover) {
+			transition: fill 0.3s ease-in-out;
+			cursor: pointer;
+
+			&:hover {
+				fill: #43ffd2;
+			}
+		}
+	}
+}

@@ -1,0 +1,136 @@
+@use 'sass:math';
+
+@import '../../style/helpers/mixins';
+@import '../../style/helpers/vars';
+
+.header {
+	position: relative;
+	padding: 10px 0;
+	background-color: #000;
+	color: #fff;
+
+	&__container {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		@include adaptiveValue('gap', 35, 25, $containerWidth, 992);
+	}
+
+	&__nav {
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+
+		@media (max-width: $tablet) {
+			display: none;
+		}
+	}
+
+	&__row {
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+		@include adaptiveValue('gap', 50, 25, $containerWidth, 992);
+	}
+
+	&__logo-mobile {
+		display: none;
+
+		@media (max-width: $tablet) {
+			display: inline-block;
+			margin-right: -30px;
+			font-family: 'Cormorant';
+			font-size: 20px;
+			font-weight: 300;
+			line-height: 24px;
+			text-transform: uppercase;
+			text-align: center;
+		}
+	}
+
+	&__logo {
+		@include adaptiveValue('margin-right', 76, 25, $containerWidth, 992);
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	&__search {
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+	}
+
+	&__phone {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: #43ffd2;
+		font-size: 14px;
+		line-height: 21px;
+		letter-spacing: 2px;
+
+		svg {
+			fill: #43ffd2;
+		}
+
+		@media (max-width: $tablet) {
+			display: none;
+		}
+
+		@media (any-hover: hover) {
+			span,
+			svg {
+				transition: all 0.3s ease;
+			}
+
+			&:hover {
+				span {
+					color: #fff;
+				}
+
+				svg {
+					fill: #fff;
+				}
+			}
+		}
+	}
+
+	&__menu-btn {
+		display: none;
+		@media (max-width: $tablet) {
+			display: block;
+			position: relative;
+			width: 20px;
+			height: 11px;
+			z-index: 5;
+			@media (any-hover: none) {
+				cursor: default;
+			}
+			span,
+			&::before,
+			&::after {
+				content: '';
+				transition: all 0.3s ease 0s;
+				right: 0;
+				position: absolute;
+				width: 100%;
+				height: 1px;
+				background-color: #43ffd2;
+			}
+			&::before {
+				top: 0;
+			}
+			&::after {
+				bottom: 0;
+			}
+			span {
+				top: calc(50% - toRem(1));
+			}
+		}
+	}
+}
