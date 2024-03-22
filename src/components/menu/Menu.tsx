@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 import Search from '../search/Search';
@@ -13,6 +13,20 @@ interface IMenuProps {
 
 function Menu({ isOpen, handleClick }: IMenuProps) {
 	const [isInputVisible, setInputVisible] = useState(false);
+
+	useEffect(() => {
+		const handleEscapeKeyPress = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				handleClick(false);
+			}
+		};
+
+		document.addEventListener('keydown', handleEscapeKeyPress);
+
+		return () => {
+			document.removeEventListener('keydown', handleEscapeKeyPress);
+		};
+	}, []);
 
 	return (
 		<div
@@ -32,9 +46,13 @@ function Menu({ isOpen, handleClick }: IMenuProps) {
 				</button>
 				<a
 					href="#"
-					className="logo mb-10">
-					<span>L</span>
-					<span>F</span>
+					className="menu__logo">
+					<Icon
+						name="logo"
+						width={22}
+						height={48}
+						fill="#fff"
+					/>
 				</a>
 				<Search
 					isVisible={isInputVisible}

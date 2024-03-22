@@ -67,9 +67,12 @@
 	}
 
 	&__input {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 0;
 		padding: 0;
-		background: transparent;
+		background: #000;
 		border: none;
 		outline: none;
 		font-size: 14px;
@@ -78,8 +81,6 @@
 		letter-spacing: 1px;
 		color: #fff;
 		text-transform: uppercase;
-		pointer-events: none;
-		visibility: hidden;
 		transition: width 0.5s ease;
 
 		&::placeholder {
@@ -91,19 +92,21 @@
 
 		&--open {
 			width: 100%;
-			pointer-events: all;
-			visibility: visible;
+			padding-right: 24px;
 		}
 	}
 
 	&__field {
-		display: flex;
-		align-items: center;
-		gap: 10px;
+		position: relative;
 		width: 100%;
+		height: 21px;
 	}
 
 	&__close {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
 		fill: #7c7c7c;
 
 		@media (any-hover: hover) {

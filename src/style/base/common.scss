@@ -99,39 +99,6 @@
 	}
 }
 
-.logo {
-	position: relative;
-	display: inline-block;
-	padding-bottom: 7px;
-	font-family: 'Cormorant';
-	font-size: 60px;
-	font-weight: 300;
-	text-transform: uppercase;
-
-	span {
-		&:nth-child(1) {
-			color: #8a8686;
-
-			@media (max-width: $tablet) {
-				font-size: 40px;
-			}
-		}
-
-		&:nth-child(2) {
-			position: absolute;
-			top: 7px;
-			right: -1px;
-			font-size: 50px;
-
-			@media (max-width: $tablet) {
-				top: 13px;
-				right: 0px;
-				font-size: 30px;
-			}
-		}
-	}
-}
-
 .mb {
 	&-10 {
 		margin-bottom: 10px;

@@ -31,10 +31,16 @@
 		transform: translateX(-100%);
 		width: 260px;
 		height: 100vh;
-		padding: 10px 10px 20px;
+		padding: 50px 10px 20px;
 		background-color: #000;
 		transition: transform 0.3s ease;
 		overflow-y: scroll;
+	}
+
+	&__logo {
+		position: absolute;
+		top: 0;
+		left: 10px;
 	}
 
 	&__list {

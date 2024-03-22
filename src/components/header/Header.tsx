@@ -33,43 +33,77 @@ function Header() {
 				<nav className="header__nav">
 					<a
 						href="#"
-						className="header__logo logo">
-						<span>L</span>
-						<span>F</span>
+						className="header__logo">
+						<Icon
+							name="logo"
+							width={34}
+							height={75}
+							fill="#fff"
+						/>
 					</a>
 					<ul className="header__row">
-						<li>
-							<span className="nav-link">Каталог</span>
+						<li className="header__item">
+							<span className="header__sub-link nav-link">Каталог</span>
+							<ul className="sub-menu">
+								<li className="sub-menu__item">
+									<a
+										href="#"
+										className="nav-link">
+										Популярное
+									</a>
+								</li>
+								<li className="sub-menu__item">
+									<a
+										href="#"
+										className="nav-link">
+										Популярное
+									</a>
+								</li>
+								<li className="sub-menu__item">
+									<a
+										href="#"
+										className="nav-link">
+										Популярное
+									</a>
+								</li>
+								<li className="sub-menu__item">
+									<a
+										href="#"
+										className="nav-link">
+										Популярное
+									</a>
+								</li>
+							</ul>
 						</li>
-						<li>
+						<li className="header__item">
 							<a
 								href="#"
 								className="nav-link">
 								Доставка и оплата
 							</a>
 						</li>
-						<li>
+						<li className="header__item">
 							<a
 								href="#"
 								className="nav-link">
 								О нас
 							</a>
 						</li>
-						<li>
+						<li className="header__item">
 							<a
 								href="#"
 								className="nav-link">
 								Контакты
 							</a>
 						</li>
-						<li>
+						<li className="header__item">
 							<a
 								href="#"
 								className="nav-link">
 								FAQ
 							</a>
 						</li>
-						<li className="header__search">
+						<li className="header__item header__search">
 							<Search
 								isVisible={isInputVisible}
 								handleClick={setInputVisible}

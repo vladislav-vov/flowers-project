@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import Icon from '../icon/Icon';
@@ -11,6 +12,10 @@ interface ISearchProps {
 }
 
 function Search({ isVisible, handleClick, className }: ISearchProps) {
+	const inputRef = useRef<HTMLInputElement | null>(null);
+
+	// useEffect(() => inputRef.current?.focus(), []);
+
 	return (
 		<form
 			className={classNames('search', className, {
@@ -32,12 +37,16 @@ function Search({ isVisible, handleClick, className }: ISearchProps) {
 				{!isVisible && (
 					<span
 						className="search__text"
-						onClick={() => handleClick(true)}>
+						onClick={() => {
+							inputRef.current?.focus();
+							handleClick(true);
+						}}>
 						Поиск
 					</span>
 				)}
 
 				<input
+					ref={inputRef}
 					type="text"
 					className={classNames('search__input', {
 						'search__input--open': isVisible,

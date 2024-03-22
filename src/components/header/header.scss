@@ -5,21 +5,24 @@
 
 .header {
 	position: relative;
-	padding: 10px 0;
 	background-color: #000;
 	color: #fff;
 
 	&__container {
 		position: relative;
 		display: flex;
-		align-items: center;
 		justify-content: space-between;
+		min-height: 80px;
 		@include adaptiveValue('gap', 35, 25, $containerWidth, 992);
+
+		@media (max-width: $tablet) {
+			align-items: center;
+		}
 	}
 
 	&__nav {
 		display: flex;
-		align-items: center;
+		align-items: stretch;
 		flex: 1 1 auto;
 
 		@media (max-width: $tablet) {
@@ -29,9 +32,36 @@
 
 	&__row {
 		display: flex;
-		align-items: center;
+		align-items: stretch;
 		flex: 1 1 auto;
-		@include adaptiveValue('gap', 50, 25, $containerWidth, 992);
+		gap: 10px;
+	}
+
+	&__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 0 20px;
+
+		@media (max-width: 1100px) {
+			padding: 0 10px;
+		}
+	}
+
+	&__sub-link {
+		display: flex;
+		align-items: center;
+		height: 100%;
+
+		&::after {
+			display: none;
+		}
+
+		@media (any-hover: hover) {
+			&:hover + .sub-menu {
+				display: flex;
+			}
+		}
 	}
 
 	&__logo-mobile {
@@ -50,7 +80,8 @@
 	}
 
 	&__logo {
-		@include adaptiveValue('margin-right', 76, 25, $containerWidth, 992);
+		align-self: center;
+		@include adaptiveValue('margin-right', 50, 25, $containerWidth, 992);
 	}
 
 	&__actions {
@@ -60,8 +91,6 @@
 	}
 
 	&__search {
-		display: flex;
-		align-items: center;
 		flex: 1 1 auto;
 	}
 
@@ -131,6 +160,24 @@
 			span {
 				top: calc(50% - toRem(1));
 			}
+		}
+	}
+}
+
+.sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: none;
+	flex-direction: column;
+	gap: 4px;
+	max-width: 300px;
+	padding: 10px 20px;
+	background: rgba(0, 0, 0, 0.2);
+
+	@media (any-hover: hover) {
+		&:hover {
+			display: flex;
 		}
 	}
 }
