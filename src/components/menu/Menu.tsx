@@ -28,6 +28,14 @@ function Menu({ isOpen, handleClick }: IMenuProps) {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (isOpen) {
+			document.body.classList.add('lock');
+		} else {
+			document.body.classList.remove('lock');
+		}
+	}, [isOpen]);
+
 	return (
 		<div
 			className={classNames('menu', {

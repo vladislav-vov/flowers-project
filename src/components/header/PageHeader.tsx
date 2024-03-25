@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import Icon from '../icon/Icon';
 import Menu from '../menu/Menu';
@@ -6,12 +7,16 @@ import Search from '../search/Search';
 
 import './header.scss';
 
-function Header() {
+interface IPageHeaderProps {
+	className?: string;
+}
+
+const PageHeader = ({ className }: IPageHeaderProps) => {
 	const [isInputVisible, setInputVisible] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<header className="header">
+		<header className={classNames('header', 'header--transparent', className)}>
 			<Menu
 				isOpen={isMenuOpen}
 				handleClick={setIsMenuOpen}
@@ -25,11 +30,6 @@ function Header() {
 					}}>
 					<span></span>
 				</button>
-				<a
-					href="#"
-					className="header__logo-mobile">
-					Lover <br /> flower
-				</a>
 				<nav className="header__nav">
 					<a
 						href="#"
@@ -112,32 +112,33 @@ function Header() {
 					</ul>
 				</nav>
 				<div className="header__actions">
-					{!isInputVisible && (
-						<a
-							href="#"
-							className="header__phone">
-							<Icon
-								name="phone"
-								width={14}
-								height={16}
-							/>
-							<span>+375 (29) 113-69-69</span>
-						</a>
-					)}
-					<button
-						type="button"
-						className="cart-btn">
-						<Icon
-							name="cart"
-							width={24}
-							height={25}
-						/>
-						<span className="cart-btn__count">5</span>
-					</button>
+					<ul
+						className={classNames('header__contacts', {
+							'header__contacts-hidden': isInputVisible,
+						})}>
+						<li className="header__contacts-item">
+							<a
+								href="#"
+								className="header__contacts-text--accent">
+								zakaz@loverflower.by
+							</a>
+							<p className="header__contacts-text--light">
+								Доставка 24/7 по договоренности с оператором
+							</p>
+						</li>
+						<li className="header__contacts-item">
+							<span className="header__contacts-text--accent">
+								ул. Тимирязева 67
+							</span>
+							<p className="header__contacts-text--light">
+								10:00 до 21:00 <br /> без выходных
+							</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</header>
 	);
-}
+};
 
-export default Header;
+export default PageHeader;

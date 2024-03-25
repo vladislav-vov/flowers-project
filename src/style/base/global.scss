@@ -1,11 +1,18 @@
 body {
-	background-color: #fff;
+	height: 10000px;
+	background-color: #040a0a;
 	color: $textColor;
 	font-family: $fontFamily, sans-serif;
 	font-weight: 400;
 	font-size: $fontSize + px;
 	line-height: 24px;
 	overflow-x: hidden;
+
+	&.lock {
+		overflow: hidden;
+		touch-action: none;
+		overscroll-behavior: none;
+	}
 }
 
 img {

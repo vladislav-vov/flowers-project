@@ -24,6 +24,16 @@
 		}
 	}
 
+	@media (max-width: $mobile) {
+		width: 40px;
+		height: 40px;
+
+		svg {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
 	svg {
 		fill: #fff;
 		transition: fill 0.3s ease;
@@ -44,6 +54,15 @@
 		font-size: 12px;
 		line-height: 14px;
 		transition: all 0.3s ease;
+
+		@media (max-width: $mobile) {
+			top: 6px;
+			right: 6px;
+			width: 13px;
+			height: 13px;
+			font-size: 8px;
+			line-height: 12px;
+		}
 	}
 }
 
