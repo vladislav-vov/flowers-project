@@ -75,6 +75,25 @@
 		flex-direction: row;
 	}
 
+	li {
+		width: 25px;
+		height: 25px;
+	}
+
+	a {
+		svg {
+			transition: fill 0.3s ease-in-out;
+		}
+
+		@media (any-hover: hover) {
+			&:hover {
+				svg {
+					fill: #fff;
+				}
+			}
+		}
+	}
+
 	svg {
 		fill: #43ffd2;
 	}

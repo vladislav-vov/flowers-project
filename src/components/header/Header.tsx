@@ -4,23 +4,32 @@ import classNames from 'classnames';
 import Icon from '../icon/Icon';
 import Menu from '../menu/Menu';
 import Search from '../search/Search';
+import Portal from '../portal/Portal';
 
 import './header.scss';
 
-interface IPageHeaderProps {
-	className?: string;
+interface IHeaderProps {
+	className?: string[] | string;
+	displayDifferentContent?: boolean;
+	showLogo?: boolean;
 }
 
-const PageHeader = ({ className }: IPageHeaderProps) => {
+function MainHeader({
+	className,
+	displayDifferentContent = false,
+	showLogo = true,
+}: IHeaderProps) {
 	const [isInputVisible, setInputVisible] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<header className={classNames('header', 'header--transparent', className)}>
-			<Menu
-				isOpen={isMenuOpen}
-				handleClick={setIsMenuOpen}
-			/>
+		<header className={classNames('header', className)}>
+			<Portal>
+				<Menu
+					isOpen={isMenuOpen}
+					handleClick={setIsMenuOpen}
+				/>
+			</Portal>
 			<div className="header__container">
 				<button
 					type="button"
@@ -30,6 +39,14 @@ const PageHeader = ({ className }: IPageHeaderProps) => {
 					}}>
 					<span></span>
 				</button>
+				{showLogo && (
+					<a
+						href="#"
+						className="header__logo-mobile">
+						Lover <br /> flower
+					</a>
+				)}
+
 				<nav className="header__nav">
 					<a
 						href="#"
@@ -112,33 +129,60 @@ const PageHeader = ({ className }: IPageHeaderProps) => {
 					</ul>
 				</nav>
 				<div className="header__actions">
-					<ul
-						className={classNames('header__contacts', {
-							'header__contacts-hidden': isInputVisible,
-						})}>
-						<li className="header__contacts-item">
+					{!isInputVisible && !displayDifferentContent && (
+						<>
 							<a
 								href="#"
-								className="header__contacts-text--accent">
-								zakaz@loverflower.by
+								className="header__phone">
+								<Icon
+									name="phone"
+									width={14}
+									height={16}
+								/>
+								<span>+375 (29) 113-69-69</span>
 							</a>
-							<p className="header__contacts-text--light">
-								Доставка 24/7 по договоренности с оператором
-							</p>
-						</li>
-						<li className="header__contacts-item">
-							<span className="header__contacts-text--accent">
-								ул. Тимирязева 67
-							</span>
-							<p className="header__contacts-text--light">
-								10:00 до 21:00 <br /> без выходных
-							</p>
-						</li>
-					</ul>
+							<button
+								type="button"
+								className="cart-btn">
+								<Icon
+									name="cart"
+									width={24}
+									height={25}
+								/>
+								<span className="cart-btn__count">5</span>
+							</button>
+						</>
+					)}
+
+					{displayDifferentContent && (
+						<ul
+							className={classNames('header__contacts', {
+								'header__contacts-hidden': isInputVisible,
+							})}>
+							<li className="header__contacts-item">
+								<a
+									href="#"
+									className="header__contacts-text--accent">
+									zakaz@loverflower.by
+								</a>
+								<p className="header__contacts-text--light">
+									Доставка 24/7 по договоренности с оператором
+								</p>
+							</li>
+							<li className="header__contacts-item">
+								<span className="header__contacts-text--accent">
+									ул. Тимирязева 67
+								</span>
+								<p className="header__contacts-text--light">
+									10:00 до 21:00 <br /> без выходных
+								</p>
+							</li>
+						</ul>
+					)}
 				</div>
 			</div>
 		</header>
 	);
-};
+}
 
-export default PageHeader;
+export default MainHeader;

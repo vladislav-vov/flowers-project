@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-import PageHeader from '../../components/header/PageHeader';
+import Header from '../../components/header/Header';
 import Icon from '../../components/icon/Icon';
 import MoveableComponent from '../../components/moveable/MoveableComponent';
 
@@ -8,34 +8,69 @@ import './homePage.scss';
 
 import promoBgBase from '../../resources/img/promo-layer.png';
 import promoBgFront from '../../resources/img/promo-layer-front.png';
+import signature from '../../resources/img/promo-signature.svg';
 
 function HomePage() {
 	const [isHeaderFixed, setIsHeaderFixed] = useState(false);
 	const promoSectionRef = useRef<HTMLDivElement | null>(null);
+	const promoTitleRef = useRef<HTMLDivElement | null>(null);
+
+	const handleScroll = () => {
+		if (promoSectionRef.current && promoTitleRef.current) {
+			const promoHeight =
+				promoSectionRef.current.offsetHeight -
+				parseFloat(getComputedStyle(promoTitleRef.current).top);
+			const scrollY = window.scrollY;
+
+			if (window.scrollY > 0 && window.innerWidth < 992) {
+				promoTitleRef.current.style.zIndex = '5';
+			} else promoTitleRef.current.style.zIndex = '1';
+
+			setIsHeaderFixed(promoHeight <= scrollY);
+			calculateLogoSize(promoHeight, scrollY);
+		}
+	};
+
+	const calculateLogoSize = (promoHeight: number, scrollY: number) => {
+		const initialWidth = '16vw';
+		if (window.innerWidth >= 992) {
+			document.documentElement.style.setProperty(
+				'--promo-title-size',
+				initialWidth
+			);
+			return;
+		}
+		if (promoHeight <= scrollY) {
+			document.documentElement.style.setProperty('--promo-title-size', '20px');
+			return;
+		}
+		const newWidth = `calc(${initialWidth} - (${scrollY} / ${promoHeight}) * (${initialWidth} - 20px))`;
+		document.documentElement.style.setProperty('--promo-title-size', newWidth);
+	};
 
 	useEffect(() => {
-		const handleScroll = () => {
-			if (promoSectionRef.current) {
-				const promoSectionBottom = promoSectionRef.current.offsetHeight;
-				const windowHeight = window.scrollY;
-				setIsHeaderFixed(promoSectionBottom <= windowHeight);
-			}
-		};
-
 		handleScroll();
-
 		window.addEventListener('scroll', handleScroll);
+		window.addEventListener('resize', handleScroll);
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', handleScroll);
 		};
-	}, []);
+	}, [promoTitleRef.current]);
 
 	return (
 		<div
 			className="promo"
 			ref={promoSectionRef}>
-			<PageHeader className={`${isHeaderFixed ? 'header--fixed' : ''}`} />
+			<Header
+				className={[
+					'header--transparent',
+					`${isHeaderFixed ? 'header--fixed' : ''}`,
+				]}
+				displayDifferentContent={true}
+				showLogo={false}
+			/>
 			<div className="promo__layer-wrapper">
 				<div
 					className="promo__layer promo__layer-base"
@@ -49,8 +84,16 @@ function HomePage() {
 					}}></div>
 			</div>
 			<div className="promo__container">
-				<div className="promo__title promo__title-back">LOVER</div>
-				<div className="promo__title">FLOWER</div>
+				<MoveableComponent
+					destinationSelector=".promo"
+					breakpoint={992}>
+					<div
+						ref={promoTitleRef}
+						className="promo__title promo__title-back">
+						LOVER
+					</div>
+					<div className="promo__title">FLOWER</div>
+				</MoveableComponent>
 				<div className="promo__content">
 					<p className="promo__text">
 						Создаём для тех, кто ценит свежесть и изящество цветка
@@ -119,6 +162,13 @@ function HomePage() {
 						</MoveableComponent>
 					</div>
 				</div>
+				<MoveableComponent
+					destinationSelector=".promo__layer-wrapper"
+					breakpoint={992}>
+					<div className="promo__signature">
+						<Icon name="promo-signature" />
+					</div>
+				</MoveableComponent>
 			</div>
 		</div>
 	);

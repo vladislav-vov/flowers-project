@@ -6,23 +6,26 @@
 
 .promo {
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
 	color: #fff;
 
 	@media (min-width: 1440px) {
 		min-height: 1244px;
+		height: 100vh;
 	}
 
 	&__container {
 		position: relative;
 		display: flex;
 		justify-content: center;
-		align-items: flex-end;
-		padding-bottom: 100px !important;
+		flex: 1 1 auto;
+		width: 100%;
+		padding-bottom: 180px !important;
 
 		@media (max-width: $tablet) {
 			align-items: flex-end;
-			height: 100vh;
 			min-height: 480px;
 			padding-bottom: 20px !important;
 			z-index: 1;
@@ -70,7 +73,31 @@
 	}
 
 	&__layer-front {
-		z-index: 1;
+		z-index: 2;
+	}
+
+	&__signature {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 305px;
+		height: 220px;
+		object-fit: cover;
+		z-index: 5;
+
+		@media (max-width: $tablet) {
+			width: 260px;
+			height: 180px;
+		}
+
+		@media (max-width: $mobile) {
+			width: 180px;
+			height: 140px;
+		}
+
+		svg {
+			fill: #1f3a3a;
+		}
 	}
 
 	&__content {
@@ -81,8 +108,8 @@
 			left: 50%;
 			transform: translateX(-50%);
 			flex: 1 1 auto;
-			padding: 30% 0 72px;
-			z-index: 1;
+			padding: 30% 0 0;
+			z-index: 2;
 		}
 
 		@media (max-width: $mobileSmall) {
@@ -92,30 +119,33 @@
 
 	&__title {
 		position: absolute;
-		top: 150px;
+		@include adaptiveValue('top', 160, 80);
 		left: 50%;
 		transform: translateX(-50%);
 		@include adaptiveValue('padding-left', 40, 10);
 		font-family: 'Cormorant';
 		font-weight: 300;
 		line-height: 80%;
-		@include adaptiveValue('letter-spacing', 40, 10);
+		letter-spacing: calc(1em / 5);
 		text-align: center;
-		@include adaptiveValue('font-size', 200, 50);
-		z-index: 1;
+		font-size: var(--promo-title-size);
+		z-index: 5;
+
+		@media (min-width: #{$containerWidth}px) {
+			font-size: 200px;
+		}
 
 		@media (max-width: $tablet) {
 			position: fixed;
-			@include adaptiveValue('top', 160, 70, 992, $minWidth);
+			top: calc(var(--promo-title-size) + 22px);
 		}
 	}
 
 	&__title-back {
 		top: 0;
-		z-index: 0;
 
 		@media (max-width: $tablet) {
-			top: 20px;
+			top: 25px;
 		}
 	}
 
@@ -149,11 +179,12 @@
 }
 
 .contacts-panel {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	@include adaptiveValue('gap', 160, 100, $containerWidth, 992);
-	z-index: 2;
+	z-index: 6;
 
 	@media (max-width: $tablet) {
 		display: none;
@@ -189,6 +220,20 @@
 
 		svg {
 			fill: #43ffd2;
+			transition: fill 0.3s ease-in-out;
+		}
+
+		@media (any-hover: hover) {
+			transition: all 0.3s ease-in-out;
+
+			&:hover {
+				background-color: #43ffd2;
+				color: #fff;
+
+				svg {
+					fill: #fff;
+				}
+			}
 		}
 	}
 

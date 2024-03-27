@@ -10,7 +10,7 @@
 	right: 0;
 	background-color: #000;
 	color: #fff;
-	z-index: 2;
+	z-index: 3;
 	transition: all 0.3s ease;
 
 	&--transparent {
@@ -69,6 +69,7 @@
 	&__row {
 		display: flex;
 		align-items: stretch;
+		flex-wrap: wrap;
 		flex: 1 1 auto;
 		gap: 10px;
 	}
