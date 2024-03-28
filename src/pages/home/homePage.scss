@@ -138,6 +138,7 @@
 		@media (max-width: $tablet) {
 			position: fixed;
 			top: calc(var(--promo-title-size) + 22px);
+			z-index: 10;
 		}
 	}
 

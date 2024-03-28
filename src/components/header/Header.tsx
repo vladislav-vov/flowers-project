@@ -141,23 +141,26 @@ function MainHeader({
 								/>
 								<span>+375 (29) 113-69-69</span>
 							</a>
-							<button
-								type="button"
-								className="cart-btn">
-								<Icon
-									name="cart"
-									width={24}
-									height={25}
-								/>
-								<span className="cart-btn__count">5</span>
-							</button>
 						</>
+					)}
+
+					{!displayDifferentContent && (
+						<button
+							type="button"
+							className="cart-btn">
+							<Icon
+								name="cart"
+								width={24}
+								height={25}
+							/>
+							<span className="cart-btn__count">5</span>
+						</button>
 					)}
 
 					{displayDifferentContent && (
 						<ul
 							className={classNames('header__contacts', {
-								'header__contacts-hidden': isInputVisible,
+								'header__contacts--hidden': isInputVisible,
 							})}>
 							<li className="header__contacts-item">
 								<a

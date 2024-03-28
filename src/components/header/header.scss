@@ -10,7 +10,7 @@
 	right: 0;
 	background-color: #000;
 	color: #fff;
-	z-index: 3;
+	z-index: 10;
 	transition: all 0.3s ease;
 
 	&--transparent {
@@ -21,6 +21,12 @@
 			.header__contacts {
 				display: none;
 			}
+
+			.header__container {
+				@media (min-width: $tablet) {
+					min-height: 80px;
+				}
+			}
 		}
 
 		@media (max-width: $tablet) {
@@ -30,6 +36,10 @@
 		.header__container {
 			align-items: flex-start;
 			gap: 0;
+
+			@media (min-width: $tablet) {
+				min-height: 140px;
+			}
 		}
 	}
 
@@ -128,6 +138,7 @@
 	&__actions {
 		display: flex;
 		align-items: center;
+		align-self: center;
 		gap: 20px;
 	}
 
@@ -210,21 +221,22 @@
 		align-items: flex-end;
 		justify-content: space-between;
 		gap: 26px;
-		padding-top: 13px;
+		margin-left: 10px;
 		text-align: right;
 		opacity: 1;
 		transition: opacity 0.3s ease;
 
+		&--hidden {
+			position: relative;
+			opacity: 0;
+			width: 0;
+			margin: 0;
+			z-index: -1;
+		}
+
 		@media (max-width: $tablet) {
 			display: none;
 		}
-	}
-
-	&__contacts-hidden {
-		position: relative;
-		opacity: 0;
-		width: 0;
-		z-index: -1;
 	}
 
 	&__contacts-item {

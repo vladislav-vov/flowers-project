@@ -22,7 +22,7 @@ function HomePage() {
 			const scrollY = window.scrollY;
 
 			if (window.scrollY > 0 && window.innerWidth < 992) {
-				promoTitleRef.current.style.zIndex = '5';
+				promoTitleRef.current.style.zIndex = '10';
 			} else promoTitleRef.current.style.zIndex = '1';
 
 			setIsHeaderFixed(promoHeight <= scrollY);
