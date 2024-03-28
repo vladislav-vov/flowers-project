@@ -6,9 +6,8 @@ import MoveableComponent from '../../components/moveable/MoveableComponent';
 
 import './homePage.scss';
 
-import promoBgBase from '../../resources/img/promo-layer.png';
-import promoBgFront from '../../resources/img/promo-layer-front.png';
-import signature from '../../resources/img/promo-signature.svg';
+import promoBgBase from '../../assets/img/promo-layer.png';
+import promoBgFront from '../../assets/img/promo-layer-front.png';
 
 function HomePage() {
 	const [isHeaderFixed, setIsHeaderFixed] = useState(false);
